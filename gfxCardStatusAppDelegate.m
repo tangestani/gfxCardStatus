@@ -262,7 +262,9 @@ BOOL canLog = NO;
 	
 	// update icon and labels according to selected GPU
 	NSString* cardString = integrated ? integratedString : discreteString;
-	[statusItem setImage:[NSImage imageNamed:integrated ? @"intel-3.png" : @"nvidia-3.png"]];
+    NSImage* icon = [NSImage imageNamed:integrated ? @"intel-3.png" : @"nvidia-3.png"];
+    icon.template = YES;  // invert colors in dark-mode
+	[statusItem setImage:icon];
 	[currentCard setTitle:[Str(@"Card") stringByReplacingOccurrencesOfString:@"%%" withString:cardString]];
 	[currentPowerSource setTitle:[NSString stringWithFormat:@"Power Source: %@", (powerSourceMonitor.currentPowerSource == psBattery) ? @"Battery" : @"AC Adaptor"]];
 	
